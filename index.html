@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+      html, body {
+        width: 100%;
+        height: 100%;
+      }
+      #wrap {
+        width: 400px;
+      }
+      #wrap > div {
+        height: 30px;
+        border: 1px solid #333;
+      }
+      ul li {
+        height: 30px;
+        border: 1px solid;
+        cursor: pointer;
+        border: 1px solid #ccc;
+      }
+      ul {
+        width: 400px;
+      }
+      /* ul li:hover {
+        background-color: pink;
+      } */
+      button {
+        width: 80px;
+        cursor: pointer;
+      }
+      #box {
+        width: 100px;
+        height: 100px;
+        background-color: blueviolet;
+        cursor: pointer;
+        position: absolute;
+      }
+    </style>
+</head>
+<body>
+    <button>添加</button>
+    <ul>
+    </ul>
+    <div id="box">
+
+    </div>
+  <script type="text/javascript">
+     // 冒泡排序
+     var arr = [3, 4, 1, 2, 9, 6, 5, 7];
+     var temp;
+     for(var i = 0; i < arr.length; i++) {
+         for (var j = 0; j < arr.length - i; j++) {
+             if (arr[j] > arr[j + 1]) {
+                temp = arr[j];
+                arr[j] = arr[j + 1];
+                arr[j + 1] = temp;
+             }
+         }
+     }
+     console.log(arr, 'arr')
+     // 事件委托
+     var oulMounse = document.querySelector('ul');
+     oulMounse.onmouseover = function(e) {
+      console.log(e)
+      e.target.style.backgroundColor = 'pink';  
+     }
+     oulMounse.onmouseout = function(e) {
+        e.target.style.backgroundColor = '#fff';
+     }
+     var count = 0;
+     document.getElementsByTagName('button')[0].onclick = function() {
+         console.log("click")
+         var li = document.createElement('li');
+         li.innerHTML = count++;
+         console.log(li)
+         oulMounse.appendChild(li);
+     };
+     // 事件拖拽
+     var isDrag = false;
+     box.onmousedown = function(e) {
+       var offLeft = this.offsetLeft;
+       var offTop = this.offsetTop;
+       var eY = e.clientY;
+       var eX = e.clientX;
+       var boxW = eX - offLeft;
+       var boxY = eY - offTop;
+       console.log(offLeft, eY);
+       document.onmousemove = function(e) {
+         console.log(document.documentElement.clientWidth, 'width')
+         if (e.clientX - boxW >= 0 && e.clientX - boxW + 100 <= document.body.clientWidth) {
+          box.style.left = e.clientX - boxW + 'px';
+         }
+         if (e.clientY - boxY >= 0 && e.clientY - boxY + 100 <= document.body.clientHeight) {
+          box.style.top = e.clientY - boxY + 'px';
+         }
+       }
+       box.onmouseup = function() {
+         document.onmousemove = null;
+       }
+     }
+  </script>
+</body>
+</html>
